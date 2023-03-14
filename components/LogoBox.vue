@@ -25,7 +25,7 @@ const {logoPath} = toRefs(props)
 
 
 // class
-const boxClass = 'logo-box w-full p-12'
+const boxClass = 'logo-box w-full p-16'
 </script>
 
 <style scoped>

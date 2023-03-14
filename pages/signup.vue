@@ -1,5 +1,5 @@
 <template>
-    <div 
+    <div
         :class="containerClass"
     >
 
@@ -11,7 +11,9 @@
 
             <text-box class="pw-box" labelName="Password" />
 
-            <button-box value="Sign in" margin="mt-2" />
+            <text-box class="pwChk-box" labelName="Password Check" />
+
+            <button-box value="Sign up" margin="mt-2" />
 
         </login-box>
 
@@ -19,8 +21,7 @@
             :class="navClass"
         >
 
-            <NuxtLink to="/signup">Sign up</NuxtLink>
-            <NuxtLink to="/pad" :class="guestClass">As a Guest</NuxtLink>
+            <NuxtLink to="/">Sign in</NuxtLink>
 
         </div>
 
@@ -29,7 +30,7 @@
 
 <script setup>
 import {getImagePath} from '~/assets/js/method.js'
-// import {ref} from 'vue'
+import {ref} from 'vue'
 
 
 // variable
@@ -37,14 +38,13 @@ const logoPath = getImagePath('logo.png')
 
 
 // class
-const containerClass = 'home-container min-w-[320px] w-[75%] sm:w-[75%] md:w-[320px] mx-auto text-white'
+const containerClass = 'signup-container min-w-[320px] w-[75%] sm:w-[75%] md:w-[320px] mx-auto text-white'
 const navClass = 'nav-box flex relative mt-2'
-const guestClass = 'absolute right-0'
 
 
 // head
 useHead({
-    title: 'Home - Drum Pad',
+    title: 'Sign up - Drum Pad',
 })
 </script>
 
