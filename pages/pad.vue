@@ -1,8 +1,12 @@
 <template>
-  
+    
 </template>
 
-<script>
+<script setup>
+// head
+useHead({
+    title: 'Pad - Drum Pad',
+})
 </script>
 
 <style>

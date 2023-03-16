@@ -19,8 +19,8 @@
             :class="navClass"
         >
 
-            <NuxtLink to="/signup">Sign up</NuxtLink>
-            <NuxtLink to="/pad" :class="guestClass">As a Guest</NuxtLink>
+            <NavLink href="/signup" name="Sign up" :class="signupClass"></NavLink>
+            <NavLink href="/pad" name="As a Guest" :class="guestClass"></NavLink>
 
         </div>
 
@@ -29,7 +29,6 @@
 
 <script setup>
 import {getImagePath} from '~/assets/js/method.js'
-// import {ref} from 'vue'
 
 
 // variable
@@ -39,6 +38,7 @@ const logoPath = getImagePath('logo.png')
 // class
 const containerClass = 'home-container min-w-[320px] w-[75%] sm:w-[75%] md:w-[320px] mx-auto text-white'
 const navClass = 'nav-box flex relative mt-2'
+const signupClass = 'absolute left-0'
 const guestClass = 'absolute right-0'
 
 

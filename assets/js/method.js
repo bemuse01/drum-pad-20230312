@@ -3,4 +3,5 @@ const getImagePath = (name) => {
     const getImageAbsolutePath = imageName => glob[`/assets/src/img/${imageName}`]['default']
     return getImageAbsolutePath(name)
 }
+
 export {getImagePath}

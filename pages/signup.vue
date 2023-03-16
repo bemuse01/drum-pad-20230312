@@ -21,7 +21,7 @@
             :class="navClass"
         >
 
-            <NuxtLink to="/">Sign in</NuxtLink>
+            <NavLink href="/" name="Sign in"></NavLink>
 
         </div>
 
@@ -30,7 +30,6 @@
 
 <script setup>
 import {getImagePath} from '~/assets/js/method.js'
-import {ref} from 'vue'
 
 
 // variable
