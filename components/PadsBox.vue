@@ -58,7 +58,7 @@ const pads = ref(Array.from({length: count.value}, (_, key) => ({
         strength: 0
     }))
 })))
-const bgColorList = ['bg-slate-700', 'bg-rose-300', 'bg-yellow-300']
+const bgColorList = ['bg-slate-700', 'bg-yellow-400', 'bg-rose-400']
 
 
 // class
