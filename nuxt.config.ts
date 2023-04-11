@@ -11,7 +11,10 @@ export default {
           ],
         }
     },
-    modules: ['@nuxtjs/tailwindcss'],
+    modules: [
+      '@nuxtjs/tailwindcss',
+      '@pinia/nuxt'
+    ],
     tailwindcss: {
         cssPath: '~/assets/css/tailwind.css',
         configPath: 'tailwind.config',

@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import {} from 'vue'
+import {onMounted} from 'vue'
 
 
 // variable
@@ -26,6 +26,11 @@ const beats = ref(4 * 4)
 // class
 const containerClass = 'pad-container w-[80%] h-[100vh] py-4 mx-auto flex flex-col gap-2'
 const controlBoxClass = 'control-box w-full h-[4rem]'
+
+
+// hook
+// onMounted(() => {
+// })
 
 
 // head

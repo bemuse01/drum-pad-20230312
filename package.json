@@ -12,6 +12,11 @@
     "nuxt": "^3.2.3"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.8",
+    "pinia": "^2.0.34",
     "tailwind-scrollbar": "^3.0.0"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }
