@@ -16,11 +16,17 @@ export default {
       '@pinia/nuxt'
     ],
     tailwindcss: {
-        cssPath: '~/assets/css/tailwind.css',
-        configPath: 'tailwind.config',
-        exposeConfig: false,
-        config: {},
-        injectPosition: 0,
-        // viewer: true,
+      cssPath: '~/assets/css/tailwind.css',
+      configPath: 'tailwind.config',
+      exposeConfig: false,
+      config: {},
+      injectPosition: 0,
+      // viewer: true,
+    },
+    vite: {
+      assetsInclude: [
+        '**/*.WAV', 
+        '**/*.wav'
+      ]
     }
 }
