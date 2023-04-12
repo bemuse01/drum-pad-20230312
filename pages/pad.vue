@@ -37,22 +37,23 @@
 
 <script setup>
 // import {onMounted} from 'vue'
-import {getImagePaths} from '~/assets/js/method.js'
+import {getImagePaths, getInstThumbPaths} from '~/assets/js/method.js'
 
 
 // variable
-const instCount = 12
+const instThumbs = getInstThumbPaths()
+const instCount = Object.keys(instThumbs).length
+const instThumbName = 'inst_'
+const instDirPath = '/assets/src/img/instThumb/' + instThumbName
+const getInstThumbPath =  (num) => instThumbs[`${instDirPath}${num}.png`]['default']
+
 const beats = ref(4 * 4)
 const instKind = ['rock', 'jazz', 'hiphop', 'percussion']
-const bgColorList = ['bg-slate-700', 'bg-yellow-400', 'bg-rose-400']
-
-const instThumbName = 'inst_'
-const instThumbNames = Array.from({length: instCount}, (_, idx) => instThumbName + (idx + 1) + '.png')
-const instThumbPaths = getImagePaths(instThumbNames)
+const bgColorList = ['bg-slate-700', 'bg-rose-400', 'bg-yellow-400']
 
 const pads = ref(Array.from({length: instCount}, (_, key) => ({
     key,
-    thumbPath: instThumbPaths[key],
+    thumbPath: getInstThumbPath(key + 1),
     cells: Array.from({length: beats.value}, (_, key2) => ({
         key: key2,
         strength: 0
@@ -66,6 +67,9 @@ const controlBoxClass = 'control-box w-full h-[4rem]'
 
 
 // method
+const playSoundByClick = () => {
+
+}
 const setCellStrength = (cell) => {
     cell.strength = (cell.strength + 1) % bgColorList.length
 }
