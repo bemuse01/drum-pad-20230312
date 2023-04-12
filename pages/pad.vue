@@ -44,8 +44,8 @@ import {getImagePaths, getInstThumbPaths} from '~/assets/js/method.js'
 const instThumbs = getInstThumbPaths()
 const instCount = Object.keys(instThumbs).length
 const instThumbName = 'inst_'
-const instDirPath = '/assets/src/img/instThumb/' + instThumbName
-const getInstThumbPath =  (num) => instThumbs[`${instDirPath}${num}.png`]['default']
+const instThumbPath = '/assets/src/img/instThumb/' + instThumbName
+const getInstThumbPath =  (num) => instThumbs[`${instThumbPath}${num}.png`]['default']
 
 const beats = ref(4 * 4)
 const instKind = ['rock', 'jazz', 'hiphop', 'percussion']

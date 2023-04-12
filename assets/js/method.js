@@ -13,5 +13,8 @@ const getInstThumbPaths = () => {
     const glob = import.meta.glob('~/assets/src/img/instThumb/*', {eager: true})
     return glob
 }
+const getInstPath = () => {
+    
+}
 
 export {getImagePath, getImagePaths, getInstThumbPaths}
