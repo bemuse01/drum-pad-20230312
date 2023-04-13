@@ -32,6 +32,7 @@ const maxStrength = bgColorList.value.length
 const minVolume = 0
 const stepVolume = (1 - minVolume) / (maxStrength - 1)
 
+
 // class
 const padCellClass = 'cell min-w-[4rem] flex-1 aspect-square rounded-lg overflow-hidden'
 const padCellClassByStrength = computed(() => padCellClass + ' ' + bgColorList.value[strength.value])
