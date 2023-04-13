@@ -10,7 +10,7 @@
 
 <script setup>
 // class
-const cellBoxClass = 'flex gap-1'
+const cellBoxClass = 'cell-box flex gap-1'
 </script>
 
 <style scoped>

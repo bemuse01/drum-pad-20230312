@@ -1,6 +1,7 @@
 <template>
     <div
         :class="padCellClassByStrength"
+        @click="onClickCell()"
     >
         <slot></slot>
         <!-- <img :src="pad.instSrc"> -->
@@ -10,32 +11,62 @@
 <script setup>
 // props
 const props = defineProps({
-    strength: {
-        type: Number,
-        default: 0
+    instPath: {
+        type: String,
+        default: ''
     },
     bgColorList: {
         type: Array,
         default: []
     }
 })
-const {strength, bgColorList} = toRefs(props)
+const {instPath, bgColorList} = toRefs(props)
 
+
+// variable
+const strength = ref(0)
+const audio = ref(null)
+const maxStrength = bgColorList.value.length
+const minVolume = 0.3
+const stepVolume = (1 - minVolume) / (maxStrength - 1)
 
 // class
 const padCellClass = 'cell min-w-[4rem] flex-1 aspect-square rounded-lg overflow-hidden'
 const padCellClassByStrength = computed(() => padCellClass + ' ' + bgColorList.value[strength.value])
- 
+
 
 // method
-// const setCellStrength = (cell) => {
-//     cell.strength = (cell.strength + 1) % bgColorList.length
-// }
-// const onClickCell = (key, key2) => {
-//     const cell = pads.value[key].cells[key2]
+const onLoadAudio = () => {
+    // isLoaded.value = true
+    console.log('loaded')
+}
+const initAudio = () => {
+    audio.value = new Audio()
+    audio.value.src = instPath.value
 
-//     setCellStrength(cell)
-// }
+    audio.value.addEventListener('loadedmetadata', () => onLoadAudio())
+}
+// 
+const playAudio = () => {
+    audio.value.currentTime = 0
+    audio.value.play()
+}
+const setVolume = () => {
+
+}
+const setStrength = () => {
+    strength.value = (strength.value + 1) % maxStrength
+}
+const onClickCell = () => {
+    setStrength()
+    playAudio()
+}
+
+
+// hook
+onMounted(() => {
+    initAudio()
+})
 </script>
 
 <style scoped>
