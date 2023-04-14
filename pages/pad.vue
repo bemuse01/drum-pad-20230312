@@ -3,12 +3,9 @@
         :class="containerClass"
     >
 
-        <pads-box :instPaths="instPaths" :thumbPaths="instThumbPaths" :beats="beats"/>
+        <pads-box :instPaths="instPaths" :thumbPaths="instThumbPaths"/>
 
-        <div
-            :class="controlBoxClass"
-        >
-        </div>
+        <control-box />
 
     </div>
 </template>
@@ -19,22 +16,15 @@ import {getImageGlob, getInstGlob} from '~/assets/js/method.js'
 
 // variable
 const collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'})
-
 const instThumbGlob = getImageGlob('instThumb')
 const instThumbPaths = Object.keys(instThumbGlob).sort(collator.compare).map(e => instThumbGlob[e]['default'])
-
 const instGlob = getInstGlob('rock')
 const instPaths = ref(Object.keys(instGlob).sort(collator.compare).map(e => instGlob[e]['default']))
-
-const instKind = ['rock', 'jazz', 'hiphop', 'percussion']
-const currentInstNum = ref(0)
-const beats = ref(4 * 4)
-const bpm = ref(100)
+const interval = ref(null)
 
 
 // class
 const containerClass = 'pad-container w-[80%] h-[100vh] py-4 mx-auto flex flex-col gap-2'
-const controlBoxClass = 'control-box w-full h-[4rem]'
 
 
 // head

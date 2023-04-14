@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="padCellClassByStrength"
+        :class="padCellClassByStrength + padCellClassByBeat"
         @click="onClickCell()"
     >
         <slot></slot>
@@ -9,8 +9,20 @@
 </template>
 
 <script setup>
+import {usePadStore} from '~/stores/pad.js'
+import {storeToRefs} from 'pinia'
+
+
+// store
+const store = usePadStore()
+const {getNowPlaying} = storeToRefs(store)
+
+
 // props
 const props = defineProps({
+    idx: {
+        type: Number,
+    },
     instPath: {
         type: String,
         default: ''
@@ -18,9 +30,12 @@ const props = defineProps({
     bgColorList: {
         type: Array,
         default: []
+    },
+    currentBeat: {
+        type: Number,
     }
 })
-const {instPath, bgColorList} = toRefs(props)
+const {idx, instPath, bgColorList, currentBeat} = toRefs(props)
 
 
 // variable
@@ -36,16 +51,20 @@ const stepVolume = (1 - minVolume) / (maxStrength - 1)
 // class
 const padCellClass = 'cell min-w-[4rem] flex-1 aspect-square rounded-lg overflow-hidden'
 const padCellClassByStrength = computed(() => padCellClass + ' ' + bgColorList.value[strength.value])
+const padCellClassByBeat = computed(() => currentBeat.value === idx.value && getNowPlaying.value ? ' ' + 'bg-lime-400': '')
 
 
 // method
+const playAudioByBeat = () => {
+    if(idx.value === currentBeat.value && strength.value !== 0) playAudio()
+}
+// 
 const playAudio = () => {
     audio.value.currentTime = 0
     audio.value.play()
 }
 const setVolume = () => {
     audio.value.volume = (minVolume + stepVolume * strength.value) * Math.min(strength.value, 1)
-    console.log(audio.value.volume)
 }
 const setStrength = () => {
     strength.value = (strength.value + 1) % maxStrength
@@ -60,17 +79,24 @@ const onClickCell = () => {
 // 
 const onLoadAudio = () => {
     isLoaded.value = true
-    // console.log('loaded')
 }
 const initAudio = () => {
+    if(isPathEmpty.value) return
+
     audio.value = new Audio()
     audio.value.src = instPath.value
 
     audio.value.addEventListener('loadedmetadata', () => onLoadAudio())
 }
 const init = () => {
-    if(!isPathEmpty.value) initAudio()
+    initAudio()
 }
+
+
+// watch
+watch(currentBeat, (cur, pre) => {
+    playAudioByBeat()
+})
 
 
 // hook

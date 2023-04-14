@@ -1,13 +1,43 @@
 import {defineStore} from 'pinia'
 
 export const usePadStore = defineStore('pad', () => {
-    const test = ref(0)
+    const instKind = ['rock', 'jazz', 'hiphop', 'percussion']
+    const currentInstNum = ref(0)
+    const currentBeat = ref(0)
+    const beats = ref(4 * 4)
+    const bpm = ref(100)
+    const nowPlaying = ref(false)
 
-    const increment = () => {
-        test.value += 1
+
+    // getters
+    const intervalTime = computed(() => 60000 / bpm.value / (beats.value / 4))
+    const getCurrentBeat = computed(() => currentBeat.value)
+    const getNowPlaying = computed(() => nowPlaying.value)
+
+
+    // actions
+    const resetBeat = () => {
+        currentBeat.value = 0
+    }
+    const increaseCurrentBeat = () => {
+        currentBeat.value = (currentBeat.value + 1) % beats.value
+    }
+    const toggleNowPlaying = () => {
+        nowPlaying.value = !nowPlaying.value
     }
 
+    // const test = ref(0)
+    // const increment = () => {
+    //     test.value += 1
+    // }
+
     return{
-        test, increment
+        beats,
+        intervalTime,
+        getCurrentBeat,
+        getNowPlaying,
+        increaseCurrentBeat,
+        toggleNowPlaying,
+        resetBeat
     }
 })

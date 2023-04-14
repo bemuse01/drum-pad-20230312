@@ -15,8 +15,10 @@
             <pads-cell
                 v-for="cell in pad.cells"
                 :key="cell.key"
+                :idx="cell.key"
                 :instPath="pad.instPath"
                 :bgColorList="bgColorList"
+                :currentBeat="getCurrentBeat"
             >
             </pads-cell>
 
@@ -26,23 +28,22 @@
 </template>
 
 <script setup>
-// import {usePadStore} from '~/stores/pad.js'
+import {usePadStore} from '~/stores/pad.js'
+import {storeToRefs} from 'pinia'
 
 
 // store
-// const store = usePadStore()
-// store.increment()
-// console.log(store.test)
+const store = usePadStore()
+const beats = store.beats
+const {getCurrentBeat} = storeToRefs(store)
 
 
 // props
 const props = defineProps({
-    // count: Number,
     instPaths: Array,
     thumbPaths: Array,
-    beats: Number,
 })
-const {instPaths, thumbPaths, beats} = toRefs(props)
+const {instPaths, thumbPaths} = toRefs(props)
 
 
 // variable
@@ -52,7 +53,7 @@ const pads = ref(thumbPaths.value.map((thumbPath, key) => ({
     key,
     thumbPath,
     instPath: instPaths.value[key],
-    cells: Array.from({length: beats.value}, (_, key2) => ({
+    cells: Array.from({length: beats}, (_, key2) => ({
         key: key2,
     }))
 })))
