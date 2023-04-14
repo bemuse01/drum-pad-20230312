@@ -1,6 +1,5 @@
 <template>
     <div
-        v-if="isLoaded"
         :class="padCellClassByStrength"
         @click="onClickCell()"
     >
@@ -26,6 +25,7 @@ const {instPath, bgColorList} = toRefs(props)
 
 // variable
 const isLoaded = ref(false)
+const isPathEmpty = ref(instPath.value === '' ? true : false)
 const strength = ref(0)
 const audio = ref(null)
 const maxStrength = bgColorList.value.length
@@ -44,11 +44,6 @@ const onLoadAudio = () => {
     // console.log('loaded')
 }
 const initAudio = () => {
-    if(instPath.value === ''){
-        isLoaded.value = true
-        return
-    }
-
     audio.value = new Audio()
     audio.value.src = instPath.value
 
@@ -67,15 +62,21 @@ const setStrength = () => {
     strength.value = (strength.value + 1) % maxStrength
 }
 const onClickCell = () => {
+    if(!isLoaded.value || isPathEmpty.value) return
+
     setStrength()
     setVolume()
     playAudio()
+}
+// 
+const init = () => {
+    if(!isPathEmpty.value) initAudio()
 }
 
 
 // hook
 onMounted(() => {
-    initAudio()
+    init()
 })
 </script>
 
