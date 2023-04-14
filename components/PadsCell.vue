@@ -39,17 +39,6 @@ const padCellClassByStrength = computed(() => padCellClass + ' ' + bgColorList.v
 
 
 // method
-const onLoadAudio = () => {
-    isLoaded.value = true
-    // console.log('loaded')
-}
-const initAudio = () => {
-    audio.value = new Audio()
-    audio.value.src = instPath.value
-
-    audio.value.addEventListener('loadedmetadata', () => onLoadAudio())
-}
-// 
 const playAudio = () => {
     audio.value.currentTime = 0
     audio.value.play()
@@ -69,6 +58,16 @@ const onClickCell = () => {
     playAudio()
 }
 // 
+const onLoadAudio = () => {
+    isLoaded.value = true
+    // console.log('loaded')
+}
+const initAudio = () => {
+    audio.value = new Audio()
+    audio.value.src = instPath.value
+
+    audio.value.addEventListener('loadedmetadata', () => onLoadAudio())
+}
 const init = () => {
     if(!isPathEmpty.value) initAudio()
 }
