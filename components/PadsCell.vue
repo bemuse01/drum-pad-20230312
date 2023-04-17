@@ -1,7 +1,7 @@
 <template>
     <div
-        :class="padCellClassByStrength + padCellClassByBeat"
-        @click="onClickCell()"
+        :class="padCellClass"
+        @click="onClickCell"
     >
         <slot></slot>
         <!-- <img :src="pad.instSrc"> -->
@@ -15,7 +15,7 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = usePadStore()
-const {getNowPlaying} = storeToRefs(store)
+const {getNowPlaying, getClearFlag} = storeToRefs(store)
 
 
 // props
@@ -49,12 +49,16 @@ const stepVolume = (1 - minVolume) / (maxStrength - 1)
 
 
 // class
-const padCellClass = 'cell min-w-[4rem] flex-1 aspect-square rounded-lg overflow-hidden'
-const padCellClassByStrength = computed(() => padCellClass + ' ' + bgColorList.value[strength.value])
-const padCellClassByBeat = computed(() => currentBeat.value === idx.value && getNowPlaying.value ? ' ' + 'bg-lime-400': '')
+const padCellBaseClass = 'cell min-w-[4rem] flex-1 aspect-square rounded-lg overflow-hidden cursor-pointer hover:opacity-[0.85]'
+const currentBgColor = computed(() => currentBeat.value === idx.value && getNowPlaying.value ? 'bg-lime-200': bgColorList.value[strength.value])
+const padCellClass = computed(() => padCellBaseClass + ' ' + currentBgColor.value)
 
 
 // method
+const resetStrength = () => {
+    strength.value = 0
+}
+// 
 const playAudioByBeat = () => {
     if(idx.value === currentBeat.value && strength.value !== 0) playAudio()
 }
@@ -66,13 +70,13 @@ const playAudio = () => {
 const setVolume = () => {
     audio.value.volume = (minVolume + stepVolume * strength.value) * Math.min(strength.value, 1)
 }
-const setStrength = () => {
+const increaseStrength = () => {
     strength.value = (strength.value + 1) % maxStrength
 }
 const onClickCell = () => {
     if(!isLoaded.value || isPathEmpty.value) return
 
-    setStrength()
+    increaseStrength()
     setVolume()
     playAudio()
 }
@@ -96,6 +100,9 @@ const init = () => {
 // watch
 watch(currentBeat, (cur, pre) => {
     playAudioByBeat()
+})
+watch(getClearFlag, (cur, pre) => {
+    resetStrength()
 })
 
 

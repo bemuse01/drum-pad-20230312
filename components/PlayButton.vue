@@ -15,7 +15,7 @@ import {storeToRefs} from 'pinia'
 // store
 const store = usePadStore()
 const {increaseCurrentBeat, toggleNowPlaying, resetBeat} = store
-const {intervalTime, getNowPlaying} = storeToRefs(store)
+const {intervalTime, getNowPlaying, getCurrentBeat} = storeToRefs(store)
 // console.log(intervalTime.value)
 
 

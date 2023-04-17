@@ -7,12 +7,14 @@ export const usePadStore = defineStore('pad', () => {
     const beats = ref(4 * 4)
     const bpm = ref(100)
     const nowPlaying = ref(false)
+    const clearFlag = ref(true)
 
 
     // getters
     const intervalTime = computed(() => 60000 / bpm.value / (beats.value / 4))
     const getCurrentBeat = computed(() => currentBeat.value)
     const getNowPlaying = computed(() => nowPlaying.value)
+    const getClearFlag = computed(() => clearFlag.value)
 
 
     // actions
@@ -25,6 +27,9 @@ export const usePadStore = defineStore('pad', () => {
     const toggleNowPlaying = () => {
         nowPlaying.value = !nowPlaying.value
     }
+    const toggleClearFlag = () => {
+        clearFlag.value = !clearFlag.value
+    }
 
     // const test = ref(0)
     // const increment = () => {
@@ -36,8 +41,10 @@ export const usePadStore = defineStore('pad', () => {
         intervalTime,
         getCurrentBeat,
         getNowPlaying,
+        getClearFlag,
         increaseCurrentBeat,
         toggleNowPlaying,
-        resetBeat
+        resetBeat,
+        toggleClearFlag
     }
 })

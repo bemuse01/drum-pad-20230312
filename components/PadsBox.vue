@@ -8,7 +8,9 @@
             :key="pad.key"
         >
 
-            <pads-cell>
+            <pads-cell
+                :currentBeat="-1"
+            >
                 <img :src="pad.thumbPath">
             </pads-cell>
 
