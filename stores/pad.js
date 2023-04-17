@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia'
 
 export const usePadStore = defineStore('pad', () => {
-    const instKind = ['rock', 'jazz', 'hiphop', 'percussion']
+    const insts = ['rock', 'jazz', 'hiphop', 'percussion']
     const currentInstNum = ref(0)
     const currentBeat = ref(0)
     const beats = ref(4 * 4)
@@ -17,6 +17,7 @@ export const usePadStore = defineStore('pad', () => {
     const getNowPlaying = computed(() => nowPlaying.value)
     const getClearFlag = computed(() => clearFlag.value)
     const getRandomFlag = computed(() => randomFlag.value)
+    const getInsts = computed(() => insts)
 
 
     // actions
@@ -48,6 +49,7 @@ export const usePadStore = defineStore('pad', () => {
         getNowPlaying,
         getClearFlag,
         getRandomFlag,
+        getInsts,
         increaseCurrentBeat,
         toggleNowPlaying,
         resetBeat,
