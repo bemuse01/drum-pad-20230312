@@ -15,7 +15,7 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = usePadStore()
-const {getNowPlaying, getClearFlag} = storeToRefs(store)
+const {getNowPlaying, getClearFlag, getCurrentBeat, getRandomFlag} = storeToRefs(store)
 
 
 // props
@@ -31,11 +31,8 @@ const props = defineProps({
         type: Array,
         default: []
     },
-    currentBeat: {
-        type: Number,
-    }
 })
-const {idx, instPath, bgColorList, currentBeat} = toRefs(props)
+const {idx, instPath, bgColorList} = toRefs(props)
 
 
 // variable
@@ -46,21 +43,25 @@ const audio = ref(null)
 const maxStrength = bgColorList.value.length
 const minVolume = 0
 const stepVolume = (1 - minVolume) / (maxStrength - 1)
+const chance = 0.8
 
 
 // class
 const padCellBaseClass = 'cell min-w-[4rem] flex-1 aspect-square rounded-lg overflow-hidden cursor-pointer hover:opacity-[0.85]'
-const currentBgColor = computed(() => currentBeat.value === idx.value && getNowPlaying.value ? 'bg-lime-200': bgColorList.value[strength.value])
+const currentBgColor = computed(() => getCurrentBeat.value === idx.value && getNowPlaying.value ? 'bg-lime-200': bgColorList.value[strength.value])
 const padCellClass = computed(() => padCellBaseClass + ' ' + currentBgColor.value)
 
 
 // method
+const setStrength = () => {
+    strength.value = Math.random() > chance ? ~~(Math.random() * maxStrength) : 0
+}
 const resetStrength = () => {
     strength.value = 0
 }
 // 
 const playAudioByBeat = () => {
-    if(idx.value === currentBeat.value && strength.value !== 0) playAudio()
+    if(idx.value === getCurrentBeat.value && strength.value !== 0) playAudio()
 }
 // 
 const playAudio = () => {
@@ -98,11 +99,15 @@ const init = () => {
 
 
 // watch
-watch(currentBeat, (cur, pre) => {
+watch(getCurrentBeat, (cur, pre) => {
     playAudioByBeat()
 })
 watch(getClearFlag, (cur, pre) => {
     resetStrength()
+})
+watch(getRandomFlag, (cur, pre) => {
+    resetStrength()
+    setStrength()
 })
 
 

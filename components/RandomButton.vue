@@ -14,7 +14,7 @@ import {usePadStore} from '~/stores/pad.js'
 
 // store
 const store = usePadStore()
-const {} = store
+const {toggleRandomFlag} = store
 // const {} = storeToRefs(store)
 
 
@@ -28,6 +28,7 @@ const imgClass = 'w-[55%] aspect-square'
 
 // method
 const onClickButton = () => {
+    toggleRandomFlag()
 }
 </script>
 

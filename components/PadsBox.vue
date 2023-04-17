@@ -20,7 +20,6 @@
                 :idx="cell.key"
                 :instPath="pad.instPath"
                 :bgColorList="bgColorList"
-                :currentBeat="getCurrentBeat"
             >
             </pads-cell>
 
@@ -31,13 +30,13 @@
 
 <script setup>
 import {usePadStore} from '~/stores/pad.js'
-import {storeToRefs} from 'pinia'
+// import {storeToRefs} from 'pinia'
 
 
 // store
 const store = usePadStore()
 const beats = store.beats
-const {getCurrentBeat} = storeToRefs(store)
+// const {} = storeToRefs(store)
 
 
 // props
