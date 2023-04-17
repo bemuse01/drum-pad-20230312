@@ -3,9 +3,18 @@
         :class="containerClass"
     >
 
-        <pads-box :instPaths="instPaths" :thumbPaths="instThumbPaths"/>
+        <div 
+            :class="wrapperClass"
+        >
 
-        <control-box />
+
+            <pads-box :instPaths="instPaths" :thumbPaths="instThumbPaths"/>
+
+            <control-box />
+
+            <!-- <menu-box /> -->
+
+        </div>
 
     </div>
 </template>
@@ -24,7 +33,8 @@ const interval = ref(null)
 
 
 // class
-const containerClass = 'pad-container w-[80%] h-[100vh] py-4 mx-auto flex flex-col gap-2'
+const containerClass = 'pad-container w-[80%] h-[100vh] mx-auto flex justify-center items-center'
+const wrapperClass = 'flex flex-col gap-2 w-full h-[98vh] relative'
 
 
 // head
