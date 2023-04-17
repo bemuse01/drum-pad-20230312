@@ -12,7 +12,9 @@
 
             <control-box />
 
-            <!-- <menu-box /> -->
+            <transition name="fade">
+                <menu-box v-if="getMenuFlag" />
+            </transition>
 
         </div>
 
@@ -21,6 +23,13 @@
 
 <script setup>
 import {getImageGlob, getInstGlob} from '~/assets/js/method.js'
+import {usePadStore} from '~/stores/pad.js'
+import {storeToRefs} from 'pinia'
+
+
+// store
+const store = usePadStore()
+const {getMenuFlag} = storeToRefs(store)
 
 
 // variable
@@ -34,7 +43,7 @@ const interval = ref(null)
 
 // class
 const containerClass = 'pad-container w-[80%] h-[100vh] mx-auto flex justify-center items-center'
-const wrapperClass = 'flex flex-col gap-2 w-full h-[98vh] relative'
+const wrapperClass = 'flex flex-col gap-2 w-full h-[98vh] relative overflow-hidden'
 
 
 // head
