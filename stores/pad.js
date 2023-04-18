@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 
 export const usePadStore = defineStore('pad', () => {
     const insts = ['rock', 'jazz', 'hiphop', 'percussion']
-    const currentInstNum = ref(0)
+    const currentInst = ref('rock')
     const currentBeat = ref(0)
     const beats = ref(4 * 4)
     const bpm = ref(100)
