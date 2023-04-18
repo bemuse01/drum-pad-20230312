@@ -8,7 +8,7 @@
         >
 
 
-            <pads-box :instPaths="instPaths" :thumbPaths="instThumbPaths"/>
+            <pads-box :thumbPaths="instThumbPaths"/>
 
             <control-box />
 
@@ -29,21 +29,40 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = usePadStore()
-const {getMenuFlag} = storeToRefs(store)
+const {setInstPaths} = store
+const {getMenuFlag, getCurrentInst} = storeToRefs(store)
 
 
 // variable
 const collator = new Intl.Collator(undefined, {numeric: true, sensitivity: 'base'})
+
 const instThumbGlob = getImageGlob('instThumb')
-const instThumbPaths = Object.keys(instThumbGlob).sort(collator.compare).map(e => instThumbGlob[e]['default'])
-const instGlob = getInstGlob('rock')
-const instPaths = ref(Object.keys(instGlob).sort(collator.compare).map(e => instGlob[e]['default']))
-const interval = ref(null)
+const instThumbPaths = ref(Object.keys(instThumbGlob).sort(collator.compare).map(e => instThumbGlob[e]['default']))
 
 
 // class
 const containerClass = 'pad-container w-[80%] h-[100vh] mx-auto flex justify-center items-center'
 const wrapperClass = 'flex flex-col gap-2 w-full h-[98vh] relative overflow-hidden'
+
+
+// method
+const loadInst = () => {
+    const instGlob = getInstGlob(getCurrentInst.value)
+    const instPaths = Object.keys(instGlob).sort(collator.compare).map(e => instGlob[e]['default'])
+    setInstPaths(instPaths)
+}
+
+
+// watch
+watch(getCurrentInst, (cur, pre) => {
+    loadInst()
+})
+
+
+// hook
+onBeforeMount(() => {
+    loadInst()
+})
 
 
 // head

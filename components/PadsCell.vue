@@ -4,7 +4,6 @@
         @click="onClickCell"
     >
         <slot></slot>
-        <!-- <img :src="pad.instSrc"> -->
     </div>
 </template>
 
@@ -15,32 +14,29 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = usePadStore()
-const {getNowPlaying, getClearFlag, getCurrentBeat, getRandomFlag} = storeToRefs(store)
+const {getNowPlaying, getClearFlag, getCurrentBeat, getRandomFlag, getInstPaths} = storeToRefs(store)
 
 
 // props
 const props = defineProps({
+    padKey: {
+        type: Number,
+    },
     idx: {
         type: Number,
     },
-    instPath: {
-        type: String,
-        default: ''
-    },
-    bgColorList: {
-        type: Array,
-        default: []
-    },
 })
-const {idx, instPath, bgColorList} = toRefs(props)
+const {idx, padKey} = toRefs(props)
 
 
 // variable
+const instPath = computed(() => getInstPaths.value[padKey.value])
 const isLoaded = ref(false)
-const isPathEmpty = ref(instPath.value === '' ? true : false)
+const isPathEmpty = ref(instPath.value === '' || instPath.value === undefined || instPath.value === null ? true : false)
 const strength = ref(0)
 const audio = ref(null)
-const maxStrength = bgColorList.value.length
+const bgColorList = ['bg-slate-700', 'bg-yellow-400', 'bg-rose-400']
+const maxStrength = bgColorList.length
 const minVolume = 0
 const stepVolume = (1 - minVolume) / (maxStrength - 1)
 const chance = 0.8
@@ -48,7 +44,7 @@ const chance = 0.8
 
 // class
 const padCellBaseClass = 'cell min-w-[4rem] flex-1 aspect-square rounded-lg overflow-hidden cursor-pointer hover:opacity-[0.85]'
-const currentBgColor = computed(() => getCurrentBeat.value === idx.value && getNowPlaying.value ? 'bg-lime-200': bgColorList.value[strength.value])
+const currentBgColor = computed(() => getCurrentBeat.value === idx.value && getNowPlaying.value ? 'bg-lime-200': bgColorList[strength.value])
 const padCellClass = computed(() => padCellBaseClass + ' ' + currentBgColor.value)
 
 
@@ -99,6 +95,9 @@ const init = () => {
 
 
 // watch
+watch(instPath, (cur, pre) => {
+    initAudio()
+})
 watch(getCurrentBeat, (cur, pre) => {
     playAudioByBeat()
 })

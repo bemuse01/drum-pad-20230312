@@ -10,6 +10,7 @@ export const usePadStore = defineStore('pad', () => {
     const clearFlag = ref(true)
     const randomFlag = ref(true)
     const menuFlag = ref(false)
+    const instPaths = ref([])
 
 
     // getters
@@ -21,6 +22,7 @@ export const usePadStore = defineStore('pad', () => {
     const getInsts = computed(() => insts.value)
     const getMenuFlag = computed(() => menuFlag.value)
     const getCurrentInst = computed(() => currentInst.value)
+    const getInstPaths = computed(() => instPaths.value)
 
 
     // actions
@@ -42,6 +44,9 @@ export const usePadStore = defineStore('pad', () => {
     const toggleMenuFlag = () => {
         menuFlag.value = !menuFlag.value
     }
+    const setInstPaths = (value) => {
+        instPaths.value = value
+    }
 
     // const test = ref(0)
     // const increment = () => {
@@ -60,11 +65,13 @@ export const usePadStore = defineStore('pad', () => {
         getInsts,
         getMenuFlag,
         getCurrentInst,
+        getInstPaths,
         increaseCurrentBeat,
         toggleNowPlaying,
         resetBeat,
         toggleClearFlag,
         toggleRandomFlag,
-        toggleMenuFlag
+        toggleMenuFlag,
+        setInstPaths
     }
 })

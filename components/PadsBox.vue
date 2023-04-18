@@ -18,8 +18,7 @@
                 v-for="cell in pad.cells"
                 :key="cell.key"
                 :idx="cell.key"
-                :instPath="pad.instPath"
-                :bgColorList="bgColorList"
+                :padKey="pad.key"
             >
             </pads-cell>
 
@@ -30,6 +29,7 @@
 
 <script setup>
 import {usePadStore} from '~/stores/pad.js'
+// import {v4 as uuidv4} from 'uuid'
 // import {storeToRefs} from 'pinia'
 
 
@@ -41,19 +41,15 @@ const beats = store.beats
 
 // props
 const props = defineProps({
-    instPaths: Array,
     thumbPaths: Array,
 })
-const {instPaths, thumbPaths} = toRefs(props)
+const {thumbPaths} = toRefs(props)
 
 
 // variable
-const isInstsLoaded = ref(false)
-const bgColorList = ['bg-slate-700', 'bg-yellow-400', 'bg-rose-400']
-const pads = ref(thumbPaths.value.map((thumbPath, key) => ({
+const pads = computed(() => thumbPaths.value.map((thumbPath, key) => ({
     key,
     thumbPath,
-    instPath: instPaths.value[key],
     cells: Array.from({length: beats}, (_, key2) => ({
         key: key2,
     }))
@@ -62,11 +58,6 @@ const pads = ref(thumbPaths.value.map((thumbPath, key) => ({
 
 // class
 const boxClass = 'pads-box pr-1 pb-1 flex-1 flex flex-col overflow-auto gap-1 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent'
- 
-
-// hook
-onMounted(() => {
-})
 </script>
 
 <style scoped>
