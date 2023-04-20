@@ -6,6 +6,7 @@
         <!-- <menu-option name="Instrument"></menu-option>
         <menu-option name="Beat"></menu-option> -->
         <menu-option-select name="Instrument" :list="getInsts" v-model="currentInst"/>
+        <menu-option-number name="BPM" :min="minBpm" :max="maxBpm" v-model.number="bpm" />
 
     </div>
 </template>
@@ -17,7 +18,8 @@ import {storeToRefs} from 'pinia'
 
 // store
 const store = usePadStore()
-const {currentInst, getInsts} = storeToRefs(store)
+const {minBpm, maxBpm} = store
+const {currentInst, getInsts, bpm} = storeToRefs(store)
 
 
 // class

@@ -6,7 +6,6 @@
         <play-button :class="buttonClass" />
         <clear-button :class="buttonClass" />
         <random-button :class="buttonClass" />
-        <bpm-controller class="h-full flex justify-center items-center" />
         <menu-button :class="buttonClass + menuButtonClass" />
 
     </div>

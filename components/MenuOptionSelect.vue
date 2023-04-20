@@ -4,7 +4,7 @@
     >
         <span>{{name}}</span>
 
-        <select @change="e => updateValue(e.target.value)">
+        <select :class="classes.select" @change="e => updateValue(e.target.value)">
 
             <option
                 v-for="item in computedList"
@@ -47,7 +47,10 @@ const computedList = computed(() => list.value.map((item, key) => ({name: item, 
 
 
 // class
-const optionClass = 'flex flex-row justify-between my-8 text-lime-500 text-2xl'
+const optionClass = 'flex justify-between my-8 text-lime-500 text-2xl'
+const classes = reactive({
+    select: 'bg-lime-500/[0.15]'
+})
 
 
 // method
@@ -58,7 +61,4 @@ const isSelected = (value) => value === modelValue.value
 </script>
 
 <style scoped>
-select{
-    background: rgba(163, 230, 53, 0.15);
-}
 </style>

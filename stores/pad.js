@@ -68,6 +68,8 @@ export const usePadStore = defineStore('pad', () => {
     return{
         beats,
         bpm,
+        maxBpm,
+        minBpm,
         currentBeat,
         currentInst,
         intervalTime,
