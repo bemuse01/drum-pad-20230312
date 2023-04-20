@@ -43,7 +43,7 @@ const chance = 0.8
 
 
 // class
-const padCellBaseClass = 'cell min-w-[4rem] flex-1 aspect-square rounded-lg overflow-hidden cursor-pointer hover:opacity-[0.85]'
+const padCellBaseClass = 'cell w-[5rem] max-sm:min-w-[5.5rem] sm:min-w-[5rem] max-w-[6rem] flex-1 aspect-square rounded-lg overflow-hidden cursor-pointer hover:opacity-[0.85]'
 const currentBgColor = computed(() => getCurrentBeat.value === idx.value && getNowPlaying.value ? 'bg-lime-200': bgColorList[strength.value])
 const padCellClass = computed(() => padCellBaseClass + ' ' + currentBgColor.value)
 

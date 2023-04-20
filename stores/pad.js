@@ -6,6 +6,8 @@ export const usePadStore = defineStore('pad', () => {
     const currentBeat = ref(0)
     const beats = ref(4 * 4)
     const bpm = ref(100)
+    const minBpm = 53
+    const maxBpm = 197
     const nowPlaying = ref(false)
     const clearFlag = ref(true)
     const randomFlag = ref(true)
@@ -23,6 +25,7 @@ export const usePadStore = defineStore('pad', () => {
     const getMenuFlag = computed(() => menuFlag.value)
     const getCurrentInst = computed(() => currentInst.value)
     const getInstPaths = computed(() => instPaths.value)
+    const getBpm = computed(() => bpm.value)
 
 
     // actions
@@ -47,6 +50,15 @@ export const usePadStore = defineStore('pad', () => {
     const setInstPaths = (value) => {
         instPaths.value = value
     }
+    const setBpm = (value) => {
+        bpm.value = value
+    }
+    const increaseBpm = () =>{ 
+        if(bpm.value < maxBpm) bpm.value++
+    }
+    const decreaseBpm = (value) => {
+        if(bpm.value > minBpm) bpm.value--
+    }
 
     // const test = ref(0)
     // const increment = () => {
@@ -55,6 +67,7 @@ export const usePadStore = defineStore('pad', () => {
 
     return{
         beats,
+        bpm,
         currentBeat,
         currentInst,
         intervalTime,
@@ -66,12 +79,16 @@ export const usePadStore = defineStore('pad', () => {
         getMenuFlag,
         getCurrentInst,
         getInstPaths,
+        getBpm,
         increaseCurrentBeat,
         toggleNowPlaying,
         resetBeat,
         toggleClearFlag,
         toggleRandomFlag,
         toggleMenuFlag,
-        setInstPaths
+        setInstPaths,
+        setBpm,
+        increaseBpm,
+        decreaseBpm
     }
 })

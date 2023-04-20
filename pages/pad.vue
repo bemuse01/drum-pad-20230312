@@ -41,8 +41,8 @@ const instThumbPaths = ref(Object.keys(instThumbGlob).sort(collator.compare).map
 
 
 // class
-const containerClass = 'pad-container w-[80%] h-[100vh] mx-auto flex justify-center items-center'
-const wrapperClass = 'flex flex-col gap-2 w-full h-[98vh] relative overflow-hidden'
+const containerClass = 'pad-container w-auto h-[100vh] mx-auto flex justify-center items-center'
+const wrapperClass = 'flex flex-col gap-2 w-auto h-[100vh] relative overflow-hidden p-3'
 
 
 // method
