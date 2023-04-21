@@ -1,10 +1,25 @@
 import {defineStore} from 'pinia'
 
 export const usePadStore = defineStore('pad', () => {
-    const insts = ref(['rock', 'jazz', 'hiphop', 'percussion'])
+    const insts = ref([
+        {name: 'rock'}, 
+        {name: 'jazz'}, 
+        {name: 'hiphop'}, 
+        {name: 'percussion'}
+    ])
     const currentInst = ref('rock')
+    const tempos = ref([
+        {
+            name: '3/4',
+            value: 3 * 4
+        },
+        {
+            name: '4/4',
+            value: 4 * 4
+        }
+    ])
+    const tempo = ref(4 * 4)
     const currentBeat = ref(0)
-    const beats = ref(4 * 4)
     const bpm = ref(100)
     const minBpm = 53
     const maxBpm = 197
@@ -16,7 +31,8 @@ export const usePadStore = defineStore('pad', () => {
 
 
     // getters
-    const intervalTime = computed(() => 60000 / bpm.value / (beats.value / 4))
+    const getTempoCount = computed(() => tempo.value)
+    const intervalTime = computed(() => 60000 / bpm.value / (getTempoCount.value / 4))
     const getCurrentBeat = computed(() => currentBeat.value)
     const getNowPlaying = computed(() => nowPlaying.value)
     const getClearFlag = computed(() => clearFlag.value)
@@ -26,6 +42,7 @@ export const usePadStore = defineStore('pad', () => {
     const getCurrentInst = computed(() => currentInst.value)
     const getInstPaths = computed(() => instPaths.value)
     const getBpm = computed(() => bpm.value)
+    const getTempos = computed(() => tempos.value)
 
 
     // actions
@@ -33,7 +50,7 @@ export const usePadStore = defineStore('pad', () => {
         currentBeat.value = 0
     }
     const increaseCurrentBeat = () => {
-        currentBeat.value = (currentBeat.value + 1) % beats.value
+        currentBeat.value = (currentBeat.value + 1) % getTempoCount.value
     }
     const toggleNowPlaying = () => {
         nowPlaying.value = !nowPlaying.value
@@ -66,7 +83,8 @@ export const usePadStore = defineStore('pad', () => {
     // }
 
     return{
-        beats,
+        currentBeat,
+        tempo,
         bpm,
         maxBpm,
         minBpm,
@@ -82,6 +100,8 @@ export const usePadStore = defineStore('pad', () => {
         getCurrentInst,
         getInstPaths,
         getBpm,
+        getTempoCount,
+        getTempos,
         increaseCurrentBeat,
         toggleNowPlaying,
         resetBeat,

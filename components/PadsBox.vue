@@ -30,13 +30,13 @@
 <script setup>
 import {usePadStore} from '~/stores/pad.js'
 // import {v4 as uuidv4} from 'uuid'
-// import {storeToRefs} from 'pinia'
+import {storeToRefs} from 'pinia'
 
 
 // store
 const store = usePadStore()
-const beats = store.beats
-// const {} = storeToRefs(store)
+// const {} = store
+const {getTempoCount} = storeToRefs(store)
 
 
 // props
@@ -50,7 +50,7 @@ const {thumbPaths} = toRefs(props)
 const pads = computed(() => thumbPaths.value.map((thumbPath, key) => ({
     key,
     thumbPath,
-    cells: Array.from({length: beats}, (_, key2) => ({
+    cells: Array.from({length: getTempoCount.value}, (_, key2) => ({
         key: key2,
     }))
 })))

@@ -1,14 +1,14 @@
 <template>
-    <div :class="boxClass">
+    <div :class="classes.box">
 
         <p
-            :class="labelClass"
+            :class="classes.label"
         >
             {{labelName}}
         </p>
         <input 
-            type="text" 
-            :class="inputClass"
+            :type="type" 
+            :class="classes.input"
         >
 
     </div>
@@ -21,21 +21,29 @@ import {ref, toRefs} from 'vue'
 // props
 const props = defineProps({
     labelName: String,
+    type: {
+        type: String,
+        default: 'text'
+    }
 })
 
 
 // variable
-const {labelName} = toRefs(props)
+const {labelName, type} = toRefs(props)
 
 
 // class
-const boxClass = 'text-box w-full h-[60px] flex flex-col gap-1'
-const labelClass = 'text-base'
-const inputClass = 'w-full h-full'
+const classes = reactive({
+    box: 'text-box w-full h-[60px] flex flex-col gap-1',
+    label: 'text-base',
+    input: 'w-full h-full bg-slate-700 rounded py-1 px-3 focus:border-sky-400 focus:border-2'
+})
 
 
 </script>
 
 <style scoped>
-
+input{
+    outline: none;
+}
 </style>

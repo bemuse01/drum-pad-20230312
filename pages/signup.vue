@@ -9,9 +9,9 @@
 
             <text-box class="username-box" labelName="Username" />
 
-            <text-box class="pw-box" labelName="Password" />
+            <text-box class="pw-box" labelName="Password" type="password"/>
 
-            <text-box class="pwChk-box" labelName="Password Check" />
+            <text-box class="pwChk-box" labelName="Password Check" type="password"/>
 
             <button-box value="Sign up" margin="mt-2" />
 

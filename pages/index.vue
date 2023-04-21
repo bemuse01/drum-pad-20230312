@@ -9,7 +9,7 @@
 
             <text-box class="username-box" labelName="Username" />
 
-            <text-box class="pw-box" labelName="Password" />
+            <text-box class="pw-box" labelName="Password" type="password"/>
 
             <button-box value="Sign in" margin="mt-2" />
 

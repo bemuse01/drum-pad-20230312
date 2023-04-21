@@ -7,9 +7,10 @@
         <select :class="classes.select" @change="e => updateValue(e.target.value)">
 
             <option
-                v-for="item in computedList"
-                :key="item.key"
-                :selected="isSelected(item.name)"
+                v-for="(item, key) in list"
+                :key="key"
+                :selected="isSelected(item.value ? item.value : item.name)"
+                :value="item.value ? item.value : item.name"
             >
                 {{item.name}}
             </option>
@@ -33,7 +34,7 @@ const props = defineProps({
         type: Array,
         default: []
     },
-    modelValue: String
+    modelValue: [Number, String]
 })
 
 
@@ -43,7 +44,6 @@ const emit = defineEmits(['update:modelValue'])
 
 // variable
 const {name, list, modelValue} = toRefs(props)
-const computedList = computed(() => list.value.map((item, key) => ({name: item, key})))
 
 
 // class
