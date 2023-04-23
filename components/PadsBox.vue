@@ -4,11 +4,13 @@
     >
 
         <pads-cell-box
+            class="max-sm:min-w-[60rem]"
             v-for="pad in pads"
             :key="pad.key"
         >
 
             <pads-cell
+                class="left-0 sticky"
                 :currentBeat="-1"
             >
                 <img :src="pad.thumbPath">
