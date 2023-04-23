@@ -20,7 +20,7 @@ const {toggleMenuFlag} = store
 
 
 // class
-const boxClass = 'menu-box w-full h-full absolute'
+const boxClass = 'menu-box top-0 left-0 w-full h-full absolute'
 const bgClass = 'w-full h-full absolute'
 
 

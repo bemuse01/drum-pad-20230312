@@ -83,6 +83,7 @@ export const usePadStore = defineStore('pad', () => {
     // }
 
     return{
+        menuFlag,
         currentBeat,
         tempo,
         bpm,
