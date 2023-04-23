@@ -4,7 +4,7 @@
     >
 
         <pads-cell-box
-            class="max-sm:min-w-[60rem]"
+            class="max-sm:min-w-[65rem]"
             v-for="pad in pads"
             :key="pad.key"
         >
